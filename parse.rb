@@ -23,13 +23,13 @@ class Ship
      :shields => "td:eq(8)",
      :cargo_capacity => "td:eq(9)",
      :cost => "td:eq(10)",
-     :puchase_locations => "td:eq(11)"}
+     :purchase_locations => "td:eq(11)"}
   end
 
   def attributes
     [:name, :class_type, :item_slots, :hull_points, :speed,
      :weapons, :engines, :computer, :shields, :cargo_capacity,
-     :cost, :purchase_locations]
+     :cost, :purchase_locations, :id]
   end
 
   def initialize(row)
@@ -40,6 +40,7 @@ class Ship
     selectors.each_pair do |key, value|
       instance_variable_set("@#{key.to_s}", @current_row.css(value).text.strip)
     end
+    @id = self.name.gsub(" ", "-")
     @current_row = nil
   end
 
@@ -59,7 +60,7 @@ class Item
   attr_accessor :name, :description, :red, :yellow, :green, :cooldown, :cost, :purchase_location
 
   def attributes
-    [:name, :description, :red, :yellow, :green, :cooldown, :cost, :purchase_location]
+    [:name, :description, :red, :yellow, :green, :cooldown, :cost, :purchase_location, :id]
   end
 
   def selectors
@@ -82,6 +83,7 @@ class Item
     selectors.each_pair do |key, value|
       instance_variable_set("@#{key.to_s}", @current_row.css(value).text.strip)
     end
+    @id = self.name.gsub(" ", "-")
     @current_row = nil
   end
 
@@ -121,7 +123,6 @@ items = items_table.css("tr")[1..-2].collect do |row|
   item.parse
   item
 end
-
 puts "Parsed #{ships.length} Ships and #{items.length} Items"
 puts "Dumping JSON Data..."
 
