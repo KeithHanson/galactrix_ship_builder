@@ -1,0 +1,2516 @@
+<html>
+<head>
+<title>Galactric Items</title>
+<link rel="stylesheet" type="text/css" href="pq.css" />
+<script src="sorttable.js"></script>
+<script type="text/javascript">
+function filterTable()
+{
+  var i, j, cnt = 0;
+  var found = 0;
+  var ele;
+  var itemList = document.getElementById("items");
+  var term = document.getElementById("filter").value.toLowerCase();
+  if (term == "")
+  {
+    for (i = 0; i < itemList.tBodies[0].rows.length; i++)
+    {
+      if (document.getElementById("learnable").checked)
+      {
+	ele = itemList.tBodies[0].rows[i].innerHTML.replace(/<[^>]+>/g,"");
+        if (ele.toLowerCase().indexOf("can't learn") >=0 )
+        {
+            itemList.tBodies[0].rows[i].style.display = "none";
+        }
+        else
+        {
+          cnt++;
+          itemList.tBodies[0].rows[i].style.display = "";
+        }
+      }
+      else
+      {
+        cnt++;
+        itemList.tBodies[0].rows[i].style.display = "";
+      }
+    }
+  }
+  else
+  {
+    for (i = 0; i < itemList.tBodies[0].rows.length; i++)
+    {
+      if (!document.getElementById("regex").checked && itemList.tBodies[0].rows[i].innerHTML.replace(/<[^>]+>/g, " ").toLowerCase().indexOf(term) < 0)
+      {
+        itemList.tBodies[0].rows[i].style.display = "none";
+      }
+      else if (document.getElementById("regex").checked && itemList.tBodies[0].rows[i].innerHTML.replace(/<[^>]+>/g, " ").toLowerCase().search(term) < 0)
+      {
+        itemList.tBodies[0].rows[i].style.display = "none";
+      }
+      else
+      {
+	if (document.getElementById("learnable").checked)
+	{
+	  ele = itemList.tBodies[0].rows[i].innerHTML.replace(/<[^>]+>/g,"");
+          if (ele.toLowerCase().indexOf("can't learn") >=0 )
+          {
+              itemList.tBodies[0].rows[i].style.display = "none";
+          }
+          else
+          {
+            cnt++;
+            itemList.tBodies[0].rows[i].style.display = "";
+          }
+	}
+	else
+	{
+          cnt++;
+          itemList.tBodies[0].rows[i].style.display = "";
+        }
+      }
+    }
+  }
+  document.getElementById("row_count").innerHTML = cnt.toString() + " items";
+}
+function removeFilter()
+{
+  document.getElementById("filter").value = "";
+  filterTable();
+}
+function doFilter(evt)
+{
+  if (evt.keyCode == 13)
+    filterTable();
+}
+function changeFilter()
+{
+  document.getElementById("regex").checked = true;
+  document.getElementById("filter").value = document.getElementById("common_filters").value;
+  filterTable();
+}
+</script>
+</head>
+<body>
+
+<h1>Galaxtrix PC/DS/PS3/XBox 360 Item List</h1>
+<p><a href="GameTips.html">Galactrix Game Guide</a></p>
+<p>Note: These pages are for the PC version of the game. Other versions may have significant differences.</p>
+<p><a href="itemsPC.html">Item List</a> | <a href="shipsPC.html">Ship List</a> | <a href="miningPC.html">Mining List</a> | <a href="skillsPC.html">Skill Tables</a> | <a href="galaxyPC.html">Map</a></p>
+<hr />
+<p>
+  <strong>Note:</strong> Click on a column header to resort the table.
+</p>
+<p />
+<h1>Filter Items</h1>
+<table id='filters'>
+  <tr>
+    <th><label for="common_filters">Common Filters:</label></td>
+    <td>
+      <select id="common_filters" onchange="changeFilter();">
+        <option value="">Choose One</option>
+        <optgroup label="Items that affect turns">
+          <option value="opponent misses">Make your enemy lose turns (5)</option>
+          <option value="does not end">Don't end your turn (17)</option>
+          <option value="turn for">Items that last additional turns (12)</option>
+        </optgroup>
+        <optgroup label="Convert Gems">
+          <option value="turns all|changes all|converts all|converts green|converts red|converts blue|converts white|converts purple">Turn all gems of one type into another (14)</option>
+          <option value="mines.*into">From mines (3)</option>
+          <option value="into.*Mines|create">Into mines (5)</option>
+          <option value="green.*into">From green (3)</option>
+          <option value="into green">Into green (1)</option>
+          <option value="red.*into">From red (2)</option>
+          <option value="into red">Into red (2)</option>
+          <option value="yellow.*into">From yellow(3)</option>
+          <option value="into yellow">Into yellow (2)</option>
+          <option value="blue.*into">From blue (1)</option>
+          <option value="into blue">Into blue (1)</option>
+          <option value="into white">Into white (1)</option>
+          <option value="into purple">Into purple (2)</option>
+        </optgroup>
+        <optgroup label="Destroy Gems">
+          <option value="destroys all">Destroy all gems of a certain type (16)</option>
+          <option value="destroys all mines">Destory all mines (2)</option>
+          <option value="destroys all blue|destroys all \w+ and blue">Destroy all blue gems (5)</option>
+          <option value="destroys all white">Destroy all white gems (3)</option>
+          <option value="destroys all purple">Destroy all purple gems (5)</option>
+          <option value="explode">Explode (4)</option>
+          <option value="column">Column based (2)</option>
+        </optgroup>
+        <optgroup label="Damage Items">
+          <option value="hull point">Hull based (1)</option>
+          <option value="points? of damage">X points of damage (14)</option>
+        </optgroup>
+        <optgroup label="Items related to skills">
+          <option value="skill">Any skill (4)</option>
+          <option value="gunnery">Gunnery skill (2)</option>
+          <option value="engineering">Engineering skill (1)</option>
+        </optgroup>
+        <optgroup label="Items that cause status effects">
+          <option value="removes all status|effect.*delete">Remove (4)</option>
+          <option value="grav">Gravity (5)</option>
+          <option value="effect.*energy|effect.*shield">Energy (12)</option>
+          <option value="effect.*damage">Damage (7)</option>
+          <option value="effect.*extra">Extra turn (1)</option>
+        </optgroup>
+      </select>
+    </tr>  
+  </tr>
+  <tr>
+    <th><label for="filter">Custom Filter:</label></th>
+    <td><input type="text" id="filter" onkeydown="doFilter(event);" size="40" /> <label for="regex">Regex match?</label> <input type="checkbox" id="regex" /></td>
+  </tr>
+  <tr>
+    <th></th>
+    <td>
+      <input type="button" onclick="filterTable();" value="Apply Custom Filter" />
+      <input type="button" onclick="removeFilter();" value="Remove Filter" />
+    </td>
+  </tr>
+</table>
+
+<h1>Items</h1>
+<p>
+  <strong>Note:</strong> 'Craft Only' means that you can obtain plans for this item to create it yourself.
+</p>
+
+<table id="items" class="sortable">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Red</th>
+      <th>Yellow</th>
+      <th>Green</th>
+      <th>Cooldown</th>
+      <th>Cost</th>
+      <th>Purchase Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <h2>Disruption Field</h2>
+        <p>
+          Prevents your opponents Shields from regenerating for 6 turns.
+        </p>
+      </td>
+      <td>3 <img src="red2.jpg" /></td>
+      <td>2 <img src="yellow2.jpg" /></td>
+      <td>1 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>1000</td>
+      <td>Keck Emporium</td>
+    </tr>
+     <tr>
+      <td>
+        <h2>Gravflux Array</h2>
+        <p>
+          Reverses Gravity for 6 turns.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>1 <img src="green2.jpg" /></td>
+      <td>6</td>
+      <td>590</td>
+      <td>Keck Emporium</td>
+    </tr>
+     <tr>
+      <td>
+        <h2>Booster Drive</h2>
+        <p>
+          Gives you the Boost effect doubling all Yellow Energy gained.<br />
+          Lasts for 6 turns.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>4 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>1000</td>
+      <td>Degani Trader</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Power Laser</h2>
+        <p>
+          Does 5 points of damage to your opponent.
+        </p>
+      </td>
+      <td>6 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>400</td>
+      <td>Ceti CPUs</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Orbital Array</h2>
+        <p>
+          Opponents Gravity rotates constantly for 6 turns.
+        </p>
+      </td>
+      <td>4 <img src="red2.jpg" /></td>
+      <td>3 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>8</td>
+      <td>1000</td>
+      <td>Keck Emporium</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Multiphase Thruster</h2>
+        <p>
+          Destroys all Gems of matching color to the one chosen.<br />
+          You gain full effect for all Gems destroyed.
+        </p>
+      </td>
+      <td>3 <img src="red2.jpg" /></td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>5600</td>
+      <td>The Scrapyards</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Auxiliary Plating</h2>
+        <p>
+	  Gives you the Auxiliary Armor effect causing each non-damage match to reinforce your Shields but award -1 less of that Gem Type.<br />
+          Lasts for 6 turns.
+        </p>
+      </td>
+      <td>0</td>
+      <td>7 <img src="yellow2.jpg" /></td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>9</td>
+      <td>2500</td>
+      <td>Fires of Azha</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Mine Sweeper</h2>
+        <p>
+	  Removes every Mine on the board.<br />
+          You gain no effect for Gems destroyed.
+        </p>
+      </td>
+      <td>3 <img src="red2.jpg" /></td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>350</td>
+      <td>Keck Emporium</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Targeting HUD</h2>
+        <p>
+	  Gives you the Targeting effect adding +3 to all Damage done.<br />
+          Lasts for 5 turns +1 turn for every 5 points of Red Energy you have.
+        </p>
+      </td>
+      <td>4 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>6 <img src="green2.jpg" /></td>
+      <td>4</td>
+      <td>1200</td>
+      <td>Erebus Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Destabilization Field</h2>
+        <p>
+          Inflicts the Destabilization effect on your opponent causing their Shields to let up to 5 points of damage through.<br />
+          Lasts for 6 turns.
+        </p>
+      </td>
+      <td>8 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>8</td>
+      <td>850</td>
+      <td>Bazaar of Keck</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Shield Matrix</h2>
+        <p>
+          Adds +5 to your Shield Energy.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>0</td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>1 <img src="green2.jpg" /></td>
+      <td>2</td>
+      <td>400</td>
+      <td>Bazaar of Keck</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Weapons Matrix</h2>
+        <p>
+          Adds +5 to your Red Energy.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>0</td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>0</td>
+      <td>400</td>
+      <td>Ceti CPUs</td>
+    </tr>
+   <tr>
+      <td>
+        <h2>Repair Bot</h2>
+        <p>
+          Repairs +5 damage +1 more for every 8 points of Green Energy you have.
+        </p>
+      </td>
+      <td>0</td>
+      <td>1 <img src="yellow2.jpg" /></td>
+      <td>7 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>550</td>
+      <td>Gemini Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Cobalt Sensor</h2>
+        <p>
+          Adds 8 to Shield Energy +1 more for every 8 points of Red Energy your opponent has.
+        </p>
+      </td>
+      <td>0</td>
+      <td>2 <img src="yellow2.jpg" /></td>
+      <td>8 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>1050</td>
+      <td>Sirius Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Basic Laser</h2>
+        <p>
+          Does 4 damage to your opponent +1 more for every 5 points of Red Energy you have.
+        </p>
+      </td>
+      <td>5 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>350</td>
+      <td>Erebus Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Military Laser</h2>
+        <p>
+          Does 8 damage to your opponent +1 more for every 3 points of Red Energy you have.
+        </p>
+      </td>
+      <td>12 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>5000</td>
+      <td>The Scrapyards</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Wasp Missiles</h2>
+        <p>
+          Does 2 damage to your opponent +1 more for every Yellow Gem on the board.
+        </p>
+      </td>
+      <td>8 <img src="red2.jpg" /></td>
+      <td>2 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>2200</td>
+      <td>Bazaar of Keck</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Basic Thruster</h2>
+        <p>
+          Destroys a single Gem of your choice on the board.<br />
+          You gain full effect for the Gem destroyed.
+        </p>
+      </td>
+      <td>0</td>
+      <td>3 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>1</td>
+      <td>1000</td>
+      <td>Erebus Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Military Sweeper</h2>
+        <p>
+          Removes all Mines on the board.<br />
+          Adds +1 Red Energy for each Mine removed and drains that amount from your opponent.
+        </p>
+      </td>
+      <td>3 <img src="red2.jpg" /></td>
+      <td>10 <img src="yellow2.jpg" /></td>
+      <td>3 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>5500</td>
+      <td>Robotic Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Shield Wave</h2>
+        <p>
+          Removes all Blue Gems on the board.<br />
+          Adds +1 to your Shield for every 2 Gems removed.
+        </p>
+      </td>
+      <td>0</td>
+      <td>10 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>4</td>
+      <td>1650</td>
+      <td>Centauri Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Auto-Repair Scanner</h2>
+        <p>
+          Repairs 8 damage +1 more for every 4 Green Gems on the board.<br />
+          Drains your Green Energy.
+        </p>
+      </td>
+      <td>0</td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>10 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>1450</td>
+      <td>Ceti CPUs</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Degausser</h2>
+        <p>
+          Removes all Status Effects on your ship.
+        </p>
+      </td>
+      <td>2 <img src="red2.jpg" /></td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>700</td>
+      <td>Erebus Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Environmental Degausser</h2>
+        <p>
+          Removes all Status Effects on the board.
+        </p>
+      </td>
+      <td>2 <img src="red2.jpg" /></td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>2</td>
+      <td>750</td>
+      <td>Bazaar of Keck</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Ultra Degausser</h2>
+        <p>
+          Removes all Status Effects in play.
+        </p>
+      </td>
+      <td>3 <img src="red2.jpg" /></td>
+      <td>11 <img src="yellow2.jpg" /></td>
+      <td>3 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>1600</td>
+      <td>Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Reflec Armor</h2>
+        <p>
+          Does 1 point of damage to your opponent for every 2 points in your Shield.<br />
+          Drains your Shield to half.
+        </p>
+      </td>
+      <td>8 <img src="red2.jpg" /></td>
+      <td>7 <img src="yellow2.jpg" /></td>
+      <td>7 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>1800</td>
+      <td>Aries Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Psi Amplifier</h2>
+        <p>
+          Drains 1-10 Psi points randomly from your Psi total.<br />
+          Does 1 point of damage to the opponent for every point drained.
+        </p>
+      </td>
+      <td>0</td>
+      <td>0</td>
+      <td>6 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>2000</td>
+      <td>Aries Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Shield Synapse</h2>
+        <p>
+          Destroys all Purple Gems on the board.<br />
+          Adds +1 to your Shield for every 2 Gems destroyed.
+        </p>
+      </td>
+      <td>0</td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>3 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>2010</td>
+      <td>Erebus Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Psi Transformer</h2>
+        <p>
+          Select a Gem.<br />
+          Changes all Gems of matching color into Purple Gems
+        </p>
+      </td>
+      <td>1 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>8 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>1960</td>
+      <td>Gemini Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Narrow-Beam Laser</h2>
+        <p>
+          Does 5 points of damage to your opponent +3 more for every 10 points in your Gunnery Skill.
+        </p>
+      </td>
+      <td>14 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>5000</td>
+      <td>Fist of Vortraag</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Platinum Transformer</h2>
+        <p>
+          Converts all Yellow Gems into Red Gems.
+        </p>
+      </td>
+      <td>1 <img src="red2.jpg" /></td>
+      <td>10 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>1</td>
+      <td>3500</td>
+      <td>Fruits of Cepheus</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>A.I. Transformer</h2>
+        <p>
+          Converts all Yellow Gems into Green Gems.
+        </p>
+      </td>
+      <td>0</td>
+      <td>10 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>3200</td>
+      <td>Cytech Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Shield Virus</h2>
+        <p>
+          Reduces the opponents Shield to 0.
+        </p>
+      </td>
+      <td>8 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>13 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>4000</td>
+      <td>Degani Trader</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Adrenal Implant</h2>
+        <p>
+          Adds +15 to your maximum Red Energy +1 more per 4 Red Gems on the board.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>6 <img src="red2.jpg" /></td>
+      <td>1 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>99</td>
+      <td>5750</td>
+      <td>Keck Emporium</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Landing Rockets</h2>
+        <p>
+          Randomly adds 4 Yellow Gems to the board.<br />
+          Adds +1 more for every 10 points of Engineering Skill you have (maximum of +10).
+        </p>
+      </td>
+      <td>0</td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>660</td>
+      <td>Bazaar of Keck</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Data Regulator</h2>
+        <p>
+          Destroys all White Gems on the board.<br />
+          You gain +1 Intel for every 2 Gems destroyed.
+        </p>
+      </td>
+      <td>0</td>
+      <td>0</td>
+      <td>7 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>1150</td>
+      <td>Hydra Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Targeting Implant</h2>
+        <p>
+          Adds +10 to your maximum Red Energy.<br />
+          Reduces the Red Energy of your opponent to 0.
+        </p>
+      </td>
+      <td>9 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>99</td>
+      <td>6200</td>
+      <td>Cytech Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Control Implant</h2>
+        <p>
+          Adds +10 to your maximum Yellow Energy +1 more per 5 Yellow Energy you have.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>99</td>
+      <td>1600</td>
+      <td>Ceti CPUs</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Data Implant</h2>
+        <p>
+          Adds +10 to your maximum Shield Energy +1 more for every 3 Blue Gems on the board.<br />
+          Destroys all Blue Gems in play.
+        </p>
+      </td>
+      <td>0</td>
+      <td>12 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>99</td>
+      <td>7000</td>
+      <td>Ceti CPUs</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Helm Implant</h2>
+        <p>
+          Adds +10 to your maximum Shield Energy +1 more per 8 levels you have.
+        </p>
+      </td>
+      <td>0</td>
+      <td>0</td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>99</td>
+      <td>3500</td>
+      <td>Cytech Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Targeting Jack</h2>
+        <p>
+          Adds +25 to your maximum Red Energy +1 more for every 4 Red Gems on the board.
+        </p>
+      </td>
+      <td>13 <img src="red2.jpg" /></td>
+      <td>3 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>99</td>
+      <td>7500</td>
+      <td>Keck Emporium</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Control Jack</h2>
+        <p>
+          Adds 10 to your maximum Yellow and Green Energy +1 more per 4 Yellow Gems on the board.
+        </p>
+      </td>
+      <td>0</td>
+      <td>10 <img src="yellow2.jpg" /></td>
+      <td>6 <img src="green2.jpg" /></td>
+      <td>99</td>
+      <td>6500</td>
+      <td>Bazaar of Keck</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Data Jack</h2>
+        <p>
+          Adds +15 to your maximum Green Energy +1 more per 4 Green Gems on the board.
+        </p>
+      </td>
+      <td>0</td>
+      <td>1 <img src="yellow2.jpg" /></td>
+      <td>6 <img src="green2.jpg" /></td>
+      <td>99</td>
+      <td>5750</td>
+      <td>Degani Trader</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Helm Jack</h2>
+        <p>
+          Adds +5 to ypur maximum Shield Energy +1 more for every 4 Blue Gems on the board.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>99</td>
+      <td>600</td>
+      <td>Degani Trader</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Cloaking Module</h2>
+        <p>
+          Cloaks your ship for 10 turns so you take no damage.<br />
+          The cloak ends if you damage your opponent.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>12 <img src="green2.jpg" /></td>
+      <td>99</td>
+      <td>10320</td>
+      <td>Fist of Vortraag</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Spectral Analyzer</h2>
+        <p>
+          Adds 15 to your maximum Red, Green and Yellow Energies +1 more for every 5 points of your opponents highest Energy amount.
+        </p>
+      </td>
+      <td>8 <img src="red2.jpg" /></td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>8 <img src="green2.jpg" /></td>
+      <td>99</td>
+      <td>12000</td>
+      <td>Cytech Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Flightpath Analyzer</h2>
+        <p>
+          Increases your maximum Shield Energy by 20 and increases your Shields by 10.
+        </p>
+      </td>
+      <td>0</td>
+      <td>12 <img src="yellow2.jpg" /></td>
+      <td>8 <img src="green2.jpg" /></td>
+      <td>99</td>
+      <td>13200</td>
+      <td>Degani Trader</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Threat Analyzer</h2>
+        <p>
+          Add 20 to your maximum Red Energy and Green Energy +1 more for each 5 points of your enemys Red Energy.
+        </p>
+      </td>
+      <td>12 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>10 <img src="green2.jpg" /></td>
+      <td>99</td>
+      <td>13600</td>
+      <td>Fruits of Cepheus</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Network Analyzer</h2>
+        <p>
+          Adds 10 to your maximum Red Energy and Yellow Energy +1 more for each 5 points of Green Energy you have.
+        </p>
+      </td>
+      <td>3 <img src="red2.jpg" /></td>
+      <td>2 <img src="yellow2.jpg" /></td>
+      <td>6 <img src="green2.jpg" /></td>
+      <td>99</td>
+      <td>6225</td>
+      <td>Musca Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Newtonian Array</h2>
+        <p>
+          Applies Gravity to the board for 8 turns causing Gems to fall downwards.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>6</td>
+      <td>700</td>
+      <td>Erebus Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Anti-Grav Array</h2>
+        <p>
+          Applies Anti-Gravity to the board for 5 turns causing Gems to fall upwards.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>7</td>
+      <td>700</td>
+      <td>Keck Emporium</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Mersenne Array</h2>
+        <p>
+          Applies the Grav-Flux effect to the board for 5 turns causing Gems to fall from random directions.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>750</td>
+      <td>Hydra Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Nebula Array</h2>
+        <p>
+          Applies the Gas Nebula effect to the board for 8 turns causing all Energy matches to double in effect.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>3 <img src="red2.jpg" /></td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>1450</td>
+      <td>Cytech Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Mine Array</h2>
+        <p>
+          Applies the Minefield effect to the board for 8 turns causing all damage Gems to double in effect.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>16 <img src="red2.jpg" /></td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>3 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>3120</td>
+      <td>Sirius Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Damage Assimilator</h2>
+        <p>
+          Destroys all Mines on the board.<br />
+          For each Mine destroyed it adds +2 to maximum Red Energy.
+        </p>
+      </td>
+      <td>10 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>99</td>
+      <td>6870</td>
+      <td>Hydra Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Language Assimilator</h2>
+        <p>
+          Destroys all White Gems on the board.<br />
+          For each Gem destroyed it adds 1 to your Green Energy.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>2100</td>
+      <td>Bazaar of Keck</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Synaptic Assimilator</h2>
+        <p>
+          Destroys all Purple Gems on the board.<br />
+          For every Gem destroyed it adds +1 to your Psi points.
+        </p>
+      </td>
+      <td>3 <img src="red2.jpg" /></td>
+      <td>3 <img src="yellow2.jpg" /></td>
+      <td>11 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>3150</td>
+      <td>Centauri Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Tractor Beam</h2>
+        <p>
+          Drains up to 8 points of Yellow Energy from your opponent adding them to your own.
+        </p>
+      </td>
+      <td>8 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>4</td>
+      <td>1</td>
+      <td>890</td>
+      <td>Ceti CPUs</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Cobalt Beam</h2>
+        <p>
+          Drains up to 10 Shield Energy from your opponent adding them to your own Shield Energy.
+        </p>
+      </td>
+      <td>12 <img src="red2.jpg" /></td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>15000</td>
+      <td>Sirius Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Multiphasic Beam</h2>
+        <p>
+          Halves all of your opponents Energy excluding Shields.
+        </p>
+      </td>
+      <td>6 <img src="red2.jpg" /></td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>6 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>3450</td>
+      <td>Fruits of Cepheus</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Darkmatter Beam</h2>
+        <p>
+          All of your opponents Energy is reduced to 0 including Shields.
+        </p>
+      </td>
+      <td>12 <img src="red2.jpg" /></td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>8 <img src="green2.jpg" /></td>
+      <td>6</td>
+      <td>18350</td>
+      <td>Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>EM Beam</h2>
+        <p>
+          Halves the Green Energy of your opponent.
+        </p>
+      </td>
+      <td>2 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>6 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>640</td>
+      <td>Fruits of Cepheus</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Space Bomb</h2>
+        <p>
+          Explodes a random Gem. All Gems surrounding it are destroyed.<br />
+          You gain full effect for every Gem destroyed.
+        </p>
+      </td>
+      <td>9 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2450</td>
+      <td>Perseus Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Cluster Bomb</h2>
+        <p>
+          All +10 Mines on the board explode destroying the surrounding Gems.<br />
+          You gain full effect for every Gem destroyed.
+        </p>
+      </td>
+      <td>20 <img src="red2.jpg" /></td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>4 <img src="green2.jpg" /></td>
+      <td>8</td>
+      <td>18200</td>
+      <td>Musca Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Mini Cluster Bomb</h2>
+        <p>
+          All +1 Mines on the board explode destroying the surrounding Gems.<br />
+          You gain full effect for every Gem destroyed.
+        </p>
+      </td>
+      <td>12 <img src="red2.jpg" /></td>
+      <td>2 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>12800</td>
+      <td>Fires of Azha</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>EM Bomb</h2>
+        <p>
+          All Green Gems on the board explode destroying the surrounding Gems.<br />
+          You gain full effect for every Gem destroyed.
+        </p>
+      </td>
+      <td>12 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>9 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>12000</td>
+      <td>Perseus Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Smart Bomb</h2>
+        <p>
+          Select a Gem. The chosen Gem and all Gems surrounding it are destroyed.<br />
+          You gain full effect for every Gem destroyed.
+        </p>
+      </td>
+      <td>12 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>4 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>8200</td>
+      <td>Gemini Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Shield Drone</h2>
+        <p>
+          Activates a Shield Drone on your ship for 5 turns.<br />
+          Your Shield regenerates 4 points at the start of each turn.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>10 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>5000</td>
+      <td>Robotic Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Interceptor Drone</h2>
+        <p>
+          Activates an Interceptor Drone on your ship for 5 turns.<br />
+         All incoming damage of +3 or greater is reduced by 5 points.
+        </p>
+      </td>
+      <td>6 <img src="red2.jpg" /></td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>1 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>7500</td>
+      <td>Hydra Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Chronotron Drone</h2>
+        <p>
+          Activates a Chronotron Drone on your ship for 5 turns.<br />
+          All Time Warp effects that make you miss a turn are deleted automatically.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>1 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>850</td>
+      <td>Robotic Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Guardian Drone</h2>
+        <p>
+          Activates a Guardian Drone on your ship for 5 turns.<br />
+          All damage is halved if your Shield Energy is greater than 0.
+        </p>
+      </td>
+      <td>0</td>
+      <td>14 <img src="yellow2.jpg" /></td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>15000</td>
+      <td>Hydra Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Ferrite Capacitor</h2>
+        <p>
+          Adds 10 to your maximum Red Energy and Green Energy +1 more for each 5 points of Yellow Energy you have.
+        </p>
+      </td>
+      <td>2 <img src="red2.jpg" /></td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>3 <img src="green2.jpg" /></td>
+      <td>99</td>
+      <td>6225</td>
+      <td>Degani Trader</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Duplex Capacitor</h2>
+        <p>
+          Adds 5 to maximum Yellow Energy +1 more for every 4 points of Yellow Energy your opponent has.
+        </p>
+      </td>
+      <td>2 <img src="red2.jpg" /></td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>3120</td>
+      <td>Aries Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Modified Capacitor</h2>
+        <p>
+          Adds +15 to your maximum Yellow Energy +1 more per 4 Yellow Gems on the board.
+        </p>
+      </td>
+      <td>0</td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>1 <img src="green2.jpg" /></td>
+      <td>99</td>
+      <td>5750</td>
+      <td>The Scrapyards</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Multiphase Capacitor</h2>
+        <p>
+          Increases all maximum Energy except Shield Energy by +3.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>8 <img src="red2.jpg" /></td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>8 <img src="green2.jpg" /></td>
+      <td>6</td>
+      <td>8250</td>
+      <td>Degani Trader</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Shield Capacitor</h2>
+        <p>
+          Adds +20 to your maximum Shield Energy +1 more for every 3 Blue Gems on the board.<br />
+          Destroys all Blue Gems in play.
+        </p>
+      </td>
+      <td>0</td>
+      <td>12 <img src="yellow2.jpg" /></td>
+      <td>8 <img src="green2.jpg" /></td>
+      <td>99</td>
+      <td>11200</td>
+      <td>The Scrapyards</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Basic Disruptor</h2>
+        <p>
+          Adds 4 turns to the Recharge Time of a random opponent Item.
+        </p>
+      </td>
+      <td>7 <img src="red2.jpg" /></td>
+      <td>1 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>4</td>
+      <td>5780</td>
+      <td>The Scrapyards</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>EM Disruptor</h2>
+        <p>
+          Adds 2 turns to the Recharge Time of all opponent Items.<br />
+          Adds +1 more turn for every 10 points of Yellow Energy you have.
+        </p>
+      </td>
+      <td>12 <img src="red2.jpg" /></td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>5</td>
+      <td>17500</td>
+      <td>Perseus Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Power Disruptor</h2>
+        <p>
+          Adds 3 turns to the Recharge Time of the most powerful Item on the opponents ship.<br />
+          The item with the highest Energy cost is considered the most powerful.
+        </p>
+      </td>
+      <td>9 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>4 <img src="green2.jpg" /></td>
+      <td>4</td>
+      <td>8390</td>
+      <td>Centauri Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Burst Disruptor</h2>
+        <p>
+          Adds 2 turns to the Recharge Time of a random opponent Item.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>6 <img src="red2.jpg" /></td>
+      <td>1 <img src="yellow2.jpg" /></td>
+      <td>3 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>7640</td>
+      <td>Bazaar of Keck</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Point Disruptor</h2>
+        <p>
+          Adds 4 turns to the Recharge Time of a random opponent Item.<br />
+          Adds 1 more Item for every 50 points in your Gunnery Skill.
+        </p>
+      </td>
+      <td>6 <img src="red2.jpg" /></td>
+      <td>3 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>4</td>
+      <td>10780</td>
+      <td>Fires of Azha</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Temporal Probe</h2>
+        <p>
+          Inflicts the Time Warp effect on the opponent.<br />
+          Opponent misses 2 turns +1 turn for every 10 Yellow Energy you have.
+        </p>
+      </td>
+      <td>0 <img src="red2.jpg" /></td>
+      <td>12 <img src="yellow2.jpg" /></td>
+      <td>1 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>14890</td>
+      <td>Hydra Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Defense Probe</h2>
+        <p>
+          Inflicts the Shield Drain effect on your opponent causing their Shield to lose 3 points each turn.<br />
+          Lasts for 4 turns +1 turn for every 5 points of Yellow Energy you have.
+        </p>
+      </td>
+      <td>0</td>
+      <td>9 <img src="yellow2.jpg" /></td>
+      <td>1 <img src="green2.jpg" /></td>
+      <td>4</td>
+      <td>1510</td>
+      <td>Perseus Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Weapon Probe</h2>
+        <p>
+          Inflicts the Weapon Drain effect on the opponent causing their Red Energy to lose 2 points each turn.<br />
+          Lasts for 5 turns +1 turn for every 6 points of Yellow Energy you have.
+        </p>
+      </td>
+      <td>0</td>
+      <td>7 <img src="yellow2.jpg" /></td>
+      <td>1 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>1020</td>
+      <td>Keck Emporium</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Data Probe</h2>
+        <p>
+          Inflicts the CPU Drain effect on your opponent causing their Green Energy to lose 2 points each turn.<br />
+          Lasts for 5 turns +1 turn for every 6 points of Yellow Energy you have.
+        </p>
+      </td>
+      <td>0</td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>769</td>
+      <td>Gemini Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Mass Drive</h2>
+        <p>
+          Gives you the Mass Driver effect adding +1 damage for every 2 Yellow Gems in play.<br />
+          Lasts for 6 turns.
+        </p>
+      </td>
+      <td>3 <img src="red2.jpg" /></td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>6</td>
+      <td>6550</td>
+      <td>Fires of Azha</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Temporal Drive</h2>
+        <p>
+          Gives you the Time Loop effect giving a 25% chance of an extra turn.<br />
+          Lasts for 5 turns +1 more turn for every 8 points of Yellow Energy you have.
+        </p>
+      </td>
+      <td>0</td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>9</td>
+      <td>2930</td>
+      <td>Sirius Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Solar Drive</h2>
+        <p>
+          Gives you the Solar Flare effect causing Red, Green or Blue Gems matches to give +2 Yellow Energy.<br />
+          Lasts for 5 turns.
+        </p>
+      </td>
+      <td>0</td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>5</td>
+      <td>970</td>
+      <td>Erebus Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Nova Drive</h2>
+        <p>
+          Gives you the Nova effect causing any Nova to fill up your Energy bars.<br />
+          Lasts for 5 turns +1 more turn for every 4 points of Yellow Energy you have.
+        </p>
+      </td>
+      <td>2 <img src="red2.jpg" /></td>
+      <td>9 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>6</td>
+      <td>13450</td>
+      <td>Centauri Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Sub-Light Drive</h2>
+        <p>
+          Gives you the Sub-Light effect adding +2 to all generated Energy.<br />
+          Lasts for 5 turns +1 more turn for every 5 points of Yellow Energy you have.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>475</td>
+      <td>Musca Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Anti-Psi Drone</h2>
+        <p>
+          Drains 20 Psi points from the opponent.
+        </p>
+      </td>
+      <td>4 <img src="red2.jpg" /></td>
+      <td>3 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>1</td>
+      <td>700</td>
+      <td>Robotic Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Needle Drone</h2>
+        <p>
+          Reduces the opponents Shield by 1 point for every 2 points of Red Energy they have.
+        </p>
+      </td>
+      <td>9 <img src="red2.jpg" /></td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>5600</td>
+      <td>Robotic Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Sabotage Drone</h2>
+        <p>
+          Randomly switches your opponents Energy totals.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>5 <img src="red2.jpg" /></td>
+      <td>2 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>2200</td>
+      <td>Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Vampyre Drone</h2>
+        <p>
+          Reduces opponent Shield by 10 +1 point for each 5 levels the opponent has.<br />
+          Adds those points to your own Shield.
+        </p>
+      </td>
+      <td>14 <img src="red2.jpg" /></td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>16600</td>
+      <td>Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Temporal Field</h2>
+        <p>
+          Inflicts the Time Warp effect on the opponent.<br />
+          Opponent misses 2 turns +1 turn for every 20 points of Shield Energy you have.
+        </p>
+      </td>
+      <td>0</td>
+      <td>7 <img src="yellow2.jpg" /></td>
+      <td>6 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>10000</td>
+      <td>Aries Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Memory Field</h2>
+        <p>
+          Inflicts the Confusion effect on the opponent halving all their skills.<br />
+          Lasts for 5 turns +1 turn for every 3 Blue Gems in play.
+        </p>
+      </td>
+      <td>0</td>
+      <td>9 <img src="yellow2.jpg" /></td>
+      <td>6 <img src="green2.jpg" /></td>
+      <td>4</td>
+      <td>11900</td>
+      <td>Robotic Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Mining Laser</h2>
+        <p>
+          Does 3 damage to your opponent +1 more for every 6 points of Yellow Energy you have.
+        </p>
+      </td>
+      <td>4 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>250</td>
+      <td>Gemini Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Mining Scoop</h2>
+        <p>
+          Destroys 6 random Gems.
+        </p>
+      </td>
+      <td>0</td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>4</td>
+      <td>600</td>
+      <td>Centauri Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>ADV Laser</h2>
+        <p>
+          Does 6 damage to your opponent +1 more for every 4 points of Red Energy you have.
+        </p>
+      </td>
+      <td>8 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1050</td>
+      <td>Degani Trader</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Regulon Field</h2>
+        <p>
+          Halves the opponents Shield..
+        </p>
+      </td>
+      <td>5 <img src="red2.jpg" /></td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>5</td>
+      <td>5000</td>
+      <td>Fruits of Cepheus</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Siphon Field</h2>
+        <p>
+          Destroys all Blue Gems in play.<br />
+          Drains 2 points from the opponents Shields for every Gem destroyed.
+        </p>
+      </td>
+      <td>3 <img src="red2.jpg" /></td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>4520</td>
+      <td>Fruits of Cepheus</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Telekinetic Generator</h2>
+        <p>
+          Destroys all Purple Gems.<br />
+          Adds 1 point of Yellow Energy for every Gem destroyed.
+        </p>
+      </td>
+      <td>5 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>1200</td>
+      <td>Degani Trader</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Data Generator</h2>
+        <p>
+          Destroys all White Gems.<br />
+          Adds 1 point of Green Energy for every Gem destroyed.
+        </p>
+      </td>
+      <td>0</td>
+      <td>0</td>
+      <td>4 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>1250</td>
+      <td>Bazaar of Keck</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Laser Generator</h2>
+        <p>
+          Destroys all Mines on the board.<br />
+          Adds 1 point of Red Energy for every Mine destroyed.
+        </p>
+      </td>
+      <td>0</td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>1</td>
+      <td>1130</td>
+      <td>Keck Emporium</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Psi-Shield Generator</h2>
+        <p>
+          Destroys all Purple Gems.<br />
+          Adds 1 point to your Shields for every Gem destroyed.
+        </p>
+      </td>
+      <td>0</td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>3570</td>
+      <td>Gemini Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Data Matrix</h2>
+        <p>
+          Adds +5 to Green Energy.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>4 <img src="red2.jpg" /></td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>2</td>
+      <td>400</td>
+      <td>Bazaar of Keck</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Engine Matrix</h2>
+        <p>
+          Adds +5 to Yellow Energy.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>3 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>2</td>
+      <td>400</td>
+      <td>Erebus Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Robotic Minelayer</h2>
+        <p>
+          Turns all Yellow Gems into +1 Mines.
+        </p>
+      </td>
+      <td>0</td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>6890</td>
+      <td>Robotic Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Spectral Minelayer</h2>
+        <p>
+          Adds 4 random +1 Mines on the board.
+        </p>
+      </td>
+      <td>3 <img src="red2.jpg" /></td>
+      <td>3 <img src="yellow2.jpg" /></td>
+      <td>3 <img src="green2.jpg" /></td>
+      <td>2</td>
+      <td>950</td>
+      <td>Aries Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Shielded Minelayer</h2>
+        <p>
+          Turns all Blue Gems into +1 Mines.
+        </p>
+      </td>
+      <td>5 <img src="red2.jpg" /></td>
+      <td>10 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>5690</td>
+      <td>Keck Emporium</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Shock Minelayer</h2>
+        <p>
+          Randomly places a single +10 Mine on the board.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>0</td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>2</td>
+      <td>12420</td>
+      <td>Fist of Vortraag</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Ultra Minelayer</h2>
+        <p>
+          Turns all lesser Mines into +3 Mines.
+        </p>
+      </td>
+      <td>0</td>
+      <td>1 <img src="yellow2.jpg" /></td>
+      <td>8 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>9000</td>
+      <td>Musca Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Mega Minelayer</h2>
+        <p>
+          Turns all lesser Mines into +5 Mines.
+        </p>
+      </td>
+      <td>0</td>
+      <td>12 <img src="yellow2.jpg" /></td>
+      <td>6 <img src="green2.jpg" /></td>
+      <td>4</td>
+      <td>13500</td>
+      <td>Musca Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Giga Minelayer</h2>
+        <p>
+          Turns all Mines into +10 Mines.
+        </p>
+      </td>
+      <td>5 <img src="red2.jpg" /></td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>16 <img src="green2.jpg" /></td>
+      <td>4</td>
+      <td>18000</td>
+      <td>Fires of Azha</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Trident Missiles</h2>
+        <p>
+          Does 3 damage to your opponent +1 damage for every Red Gem on the board.
+        </p>
+      </td>
+      <td>7 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>3 <img src="green2.jpg" /></td>
+      <td>2</td>
+      <td>6500</td>
+      <td>Aries Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Needle Missiles</h2>
+        <p>
+          Does 3 damage to your opponent +1 damage for every 2 Green Gems on the board.
+        </p>
+      </td>
+      <td>4 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>2</td>
+      <td>2500</td>
+      <td>Cytech Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Counter Missiles</h2>
+        <p>
+          Does 5 damage to your opponent and turns all Red Gems into Blue Gems.
+        </p>
+      </td>
+      <td>7 <img src="red2.jpg" /></td>
+      <td>7 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>4</td>
+      <td>1650</td>
+      <td>Robotic Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Cluster Missiles</h2>
+        <p>
+          Does 4 damage to your opponent and destroys 3 random Gems on the board.
+        </p>
+      </td>
+      <td>5 <img src="red2.jpg" /></td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>4500</td>
+      <td>Robotic Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Supanova Module</h2>
+        <p>
+          Gives you the Nova effect causing any Nova to fill up your Energy bars.<br />
+          Lasts for 5 turns +1 more for every 3 Green Gems in play.
+        </p>
+      </td>
+      <td>0</td>
+      <td>2 <img src="yellow2.jpg" /></td>
+      <td>6 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>11570</td>
+      <td>Cytech Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Shield Multiplexor</h2>
+        <p>
+          Drains your Shield but fills your Red Energy.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>0</td>
+      <td>10 <img src="yellow2.jpg" /></td>
+      <td>6 <img src="green2.jpg" /></td>
+      <td>8</td>
+      <td>6000</td>
+      <td>Sirius Engines</td>
+    </tr>
+
+    <tr>
+      <td>
+        <h2>EM Net</h2>
+        <p>
+          Inflicts your opponent with the Time Warp effect.<br />
+          Opponent misses 2 turns.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>4</td>
+      <td>3500</td>
+      <td>Perseus Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Shock Net</h2>
+        <p>
+          Inflicts your opponent with the Time Warp effect.<br />
+          Opponent misses 2 turns +1 more for every 10 points of Red Energy you have.
+        </p>
+      </td>
+      <td>6 <img src="red2.jpg" /></td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>5</td>
+      <td>5500</td>
+      <td>Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Adaptive Plating</h2>
+        <p>
+          Gives you the Adaptive Armor effect giving a 20% chance to reduce incoming damage to 1 point.<br />
+          Last for 4 turns +1 more for every 5 points of Green Energy you have.
+        </p>
+      </td>
+      <td>0</td>
+      <td>0</td>
+      <td>7 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>7600</td>
+      <td>Fist of Vortraag</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Conductive Plating</h2>
+        <p>
+          Gives you the Conductive Armor effect adding +1 to Red, Yellow, and Green Energy when taking damage.<br />
+          Lasts for 4 turns +1 more for every 5 points of Yellow Energy you have.
+        </p>
+      </td>
+      <td>0</td>
+      <td>7 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>6</td>
+      <td>5670</td>
+      <td>Aries Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Vortraag Laser</h2>
+        <p>
+          Does 10 damage to your opponent +1 more for every 5 levels you have.
+        </p>
+      </td>
+      <td>16 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>9400</td>
+      <td>Fist of Vortraag</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Basilisk Net</h2>
+        <p>
+          Inflicts your opponent with the Time Warp effect.<br />
+          Opponent misses 2 turns +1 more turn for every 8 points of Red Energy they have.
+        </p>
+      </td>
+      <td>5 <img src="red2.jpg" /></td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>10</td>
+      <td>13050</td>
+      <td>Fist of Vortraag</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Seeker Torpedoes</h2>
+        <p>
+          Does 6 damage to your opponent +1 more for every 8 points of Yellow Energy they have.
+        </p>
+      </td>
+      <td>5 <img src="red2.jpg" /></td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>2</td>
+      <td>5460</td>
+      <td>Sirius Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Vortraag Matrix</h2>
+        <p>
+          Adds +8 to your Red Energy.
+        </p>
+      </td>
+      <td>0</td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>4 <img src="green2.jpg" /></td>
+      <td>2</td>
+      <td>1000</td>
+      <td>Fist of Vortraag</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Trident Laser</h2>
+        <p>
+          Does 9 points of damage to your opponent +1 more for every 4 points of Red Energy you have.<br />
+          Your turn does not end.
+        </p>
+      </td>
+      <td>15 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>10000</td>
+      <td>Aries Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>A.I. Missiles</h2>
+        <p>
+          Does 1 point of damage to your opponent for every 2 points of your Green Energy.
+        </p>
+      </td>
+      <td>2 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>15 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>12460</td>
+      <td>Robotic Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Dark Laser</h2>
+        <p>
+          Does 20 damage to your opponent +1 more for every 2 points of Green Energy you have.
+        </p>
+      </td>
+      <td>15 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>10 <img src="green2.jpg" /></td>
+      <td>6</td>
+      <td>19000</td>
+      <td>Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Data Synapse</h2>
+        <p>
+          Destroys all Purple Gems.<br />
+          Adds +1 to Intel for every 2 Gems destroyed.
+        </p>
+      </td>
+      <td>0</td>
+      <td>0</td>
+      <td>7 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>1100</td>
+      <td>Keck Emporium</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Red-Eye Torpedoes</h2>
+        <p>
+          Does 1 point of damage to your opponent for every 2 points of Red Energy they have.
+        </p>
+      </td>
+      <td>9 <img src="red2.jpg" /></td>
+      <td>1 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>3000</td>
+      <td>Musca Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Yellowfin Torpedoes</h2>
+        <p>
+          Does 1 point of damage to your opponent for every 2 points of Yellow Energy they have.
+        </p>
+      </td>
+      <td>9 <img src="red2.jpg" /></td>
+      <td>1 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>2900</td>
+      <td>Musca Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Weapons Uplink</h2>
+        <p>
+          Converts all Green Gems into Red Gems.
+        </p>
+      </td>
+      <td>3 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>8 <img src="green2.jpg" /></td>
+      <td>2</td>
+      <td>5500</td>
+      <td>Degani Trader</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Engine Uplink</h2>
+        <p>
+          Converts all Green Gems into Yellow Gems.
+        </p>
+      </td>
+      <td>0</td>
+      <td>3 <img src="yellow2.jpg" /></td>
+      <td>8 <img src="green2.jpg" /></td>
+      <td>2</td>
+      <td>5100</td>
+      <td>Gemini Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Photonic Transformer</h2>
+        <p>
+          Select a Gem. Changes all Gems of matching color into White Gems.
+        </p>
+      </td>
+      <td>0</td>
+      <td>7 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>2990</td>
+      <td>Perseus Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Mersenne Transformer</h2>
+        <p>
+          Changes all Gems of a random color into Purple Gems.
+        </p>
+      </td>
+      <td>0</td>
+      <td>7 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>3490</td>
+      <td>Fires of Azha</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Fireball Thruster</h2>
+        <p>
+          Destroys a selected Gem plus all of the Gems around it.<br />
+          You gain full effect for every Gem destroyed.
+        </p>
+      </td>
+      <td>4 <img src="red2.jpg" /></td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>3</td>
+      <td>5210</td>
+      <td>Centauri Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Weapons Bot</h2>
+        <p>
+          Drains all of your Red Energy and doubles all of your Green Energy.
+        </p>
+      </td>
+      <td>0</td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>1</td>
+      <td>880</td>
+      <td>Robotic Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Engine Bot</h2>
+        <p>
+          Drains all of your Yellow Energy and doubles all of your Green Energy.
+        </p>
+      </td>
+      <td>0</td>
+      <td>6 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>1</td>
+      <td>990</td>
+      <td>Ceti CPUs</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Laser Blaster</h2>
+        <p>
+          Does 5 points of damage to your opponent +1 more for every 5 Red Energy you have.<br />
+          Ignores enemy Shields.
+        </p>
+      </td>
+      <td>9 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>6</td>
+      <td>4050</td>
+      <td>Fruits of Cepheus</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Molecular Blaster</h2>
+        <p>
+          Does 8 points of damage to your opponent +1 more for every 4 points of Red Energy you have.<br />
+          Ignores enemy Shields.
+        </p>
+      </td>
+      <td>14 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>9050</td>
+      <td>Musca Weaponry</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Null Wave</h2>
+        <p>
+          Destroys all Blue Gems in play. You gain no effect from the Gems.<br />
+          Does not end your turn.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>1200</td>
+      <td>Erebus Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Shock Wave</h2>
+        <p>
+          Destroys all Blue Gems in play.<br />
+          Adds +1 to your Red Energy for every 2 Gems destroyed.
+        </p>
+      </td>
+      <td>0</td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>1 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>650</td>
+      <td>The Scrapyards</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Linear Thruster</h2>
+        <p>
+          Destroys the selected column of Gems.<br />
+          You gain full effect for every Gem destroyed..
+        </p>
+      </td>
+      <td>4 <img src="red2.jpg" /></td>
+      <td>10 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>4</td>
+      <td>3500</td>
+      <td>Sirius Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Multi-Thrusters</h2>
+        <p>
+          Destroys the selected column of Gems and one column on either side.<br />
+          You gain full effect for every Gem destroyed.
+        </p>
+      </td>
+      <td>2 <img src="red2.jpg" /></td>
+      <td>15 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>4</td>
+      <td>8500</td>
+      <td>Perseus Engines</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Doomsday Bomb</h2>
+        <p>
+          All Gems on the board are removed and new Gems fall in to replace them.
+        </p>
+      </td>
+      <td>15 <img src="red2.jpg" /></td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>6</td>
+      <td>13400</td>
+      <td>Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Threat Scanner</h2>
+        <p>
+          Adds +1 point of Red Energy for every Mine on the board.
+        </p>
+      </td>
+      <td>0</td>
+      <td>2 <img src="yellow2.jpg" /></td>
+      <td>2 <img src="green2.jpg" /></td>
+      <td>1</td>
+      <td>450</td>
+      <td>Aries Shipyard</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Psi-clone Missiles</h2>
+        <p>
+          Does 5 points of Damage to the opponent +1 point for every 2 Purple Gems in play.
+        </p>
+      </td>
+      <td>9 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>3 <img src="green2.jpg" /></td>
+      <td>3</td>
+      <td>16800</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Cytech Assimilator</h2>
+        <p>
+          Changes all Green and Red Gems into Yellow Gems.
+        </p>
+      </td>
+      <td>7 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>7 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>18800</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Neptune Cannon</h2>
+        <p>
+          Removes all Blue and Red Gems from play.<br />
+          Does 1 point of Damage to the enemy for every 2 Gems removed.
+        </p>
+      </td>
+      <td>9 <img src="red2.jpg" /></td>
+      <td>2 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>4</td>
+      <td>17400</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Luminary Shield</h2>
+        <p>
+          Removes all White Gems from play.<br />
+          Increases your Shield by 5 points for every White Gem removed.
+        </p>
+      </td>
+      <td>0</td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>14 <img src="green2.jpg" /></td>
+      <td>6</td>
+      <td>17500</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Quesadan Relic</h2>
+        <p>
+          Removes all White Gems from play.<br />
+          Add +1 to Shields and Hull for every 2 Gems removed.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>9 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>16900</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Modified Laser</h2>
+        <p>
+          Does 15 points of damage to the enemy.
+        </p>
+      </td>
+      <td>8 <img src="red2.jpg" /></td>
+      <td>0</td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>0</td>
+      <td>14000</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Bola Mines</h2>
+        <p>
+          Doubles the number of mines in play.
+        </p>
+      </td>
+      <td>9 <img src="red2.jpg" /></td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>4</td>
+      <td>18000</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Zapper</h2>
+        <p>
+          Leeches a random Energy type from your enemy and adds it to your ship.
+        </p>
+      </td>
+      <td>5 <img src="red2.jpg" /></td>
+      <td>5 <img src="yellow2.jpg" /></td>
+      <td>5 <img src="green2.jpg" /></td>
+      <td>5</td>
+      <td>13500</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Vortraag Death Ray</h2>
+        <p>
+          Halves your enemys Hull points.<br />
+          Ignores enemy Shields.
+        </p>
+      </td>
+      <td>18 <img src="red2.jpg" /></td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>0</td>
+      <td>7</td>
+      <td>19000</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Elysian Pacifier</h2>
+        <p>
+          Removes all Mines from play.<br />
+          Repairs your ship by 1 point for each Mine removed.
+        </p>
+      </td>
+      <td>0</td>
+      <td>4 <img src="yellow2.jpg" /></td>
+      <td>4 <img src="green2.jpg" /></td>
+      <td>4</td>
+      <td>15900</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Keck Shell</h2>
+        <p>
+          Removes all Blue Gems from play.<br />
+          Increases all Energy reserves to maximum.
+        </p>
+      </td>
+      <td>0</td>
+      <td>8 <img src="yellow2.jpg" /></td>
+      <td>9 <img src="green2.jpg" /></td>
+      <td>4</td>
+      <td>17200</td>
+      <td>Craft Only</td>
+    </tr>
+
+
+
+
+
+ 
+  </tbody>
+  <tfoot><tr><td colspan='6' id='row_count'></td></tr></tfoot>
+</table>
+
+</body>
+</html>

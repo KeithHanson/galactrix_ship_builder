@@ -1,0 +1,649 @@
+<html>
+<head>
+<title>Galactrix Ships</title>
+<link rel="stylesheet" type="text/css" href="pq.css" />
+<script src="sorttable.js"></script>
+<script type="text/javascript">
+function filterTable()
+{
+  var i, j, cnt = 0;
+  var itemList = document.getElementById("ships");
+  var term = document.getElementById("filter").value.toLowerCase();
+  if (term == "")
+  {
+    for (i = 0; i < itemList.tBodies[0].rows.length; i++)
+    {
+      cnt++;
+      itemList.tBodies[0].rows[i].style.display = "";
+    }
+  }
+  else
+  {
+    for (i = 0; i < itemList.tBodies[0].rows.length; i++)
+    {
+      if (!document.getElementById("regex").checked && itemList.tBodies[0].rows[i].innerHTML.replace(/<[^>]+>/g, " ").toLowerCase().indexOf(term) < 0)
+      {
+        itemList.tBodies[0].rows[i].style.display = "none";
+      }
+      else if (document.getElementById("regex").checked && itemList.tBodies[0].rows[i].innerHTML.replace(/<[^>]+>/g, " ").toLowerCase().search(term) < 0)
+      {
+        itemList.tBodies[0].rows[i].style.display = "none";
+      }
+      else
+      {
+        cnt++;
+        itemList.tBodies[0].rows[i].style.display = "";
+      }
+    }
+  }
+  document.getElementById("row_count").innerHTML = cnt.toString() + " ships";
+}
+function removeFilter()
+{
+  document.getElementById("filter").value = "";
+  filterTable();
+}
+function doFilter(evt)
+{
+  if (evt.keyCode == 13)
+    filterTable();
+}
+function changeFilter()
+{
+  document.getElementById("regex").checked = true;
+  document.getElementById("filter").value = document.getElementById("common_filters").value;
+  filterTable();
+}
+</script>
+</head>
+<body>
+
+<h1>Galaxtrix PC/DS/PS3/XBox 360 Ship List</h1>
+<p><a href="GameTips.html">Galactrix Game Guide</a></p>
+<p>Note: These pages are for the PC version of the game. Other versions may have significant differences.</p>
+<p><a href="itemsPC.html">Item List</a> | <a href="shipsPC.html">Ship List</a> | <a href="miningPC.html">Mining List</a> | <a href="skillsPC.html">Skill Tables</a> | <a href="galaxyPC.html">Map</a></p>
+<hr />
+<p>
+  <strong>Note:</strong> Click on a column header to resort the table.
+</p>
+<p />
+<h1>Filter ships</h1>
+<table id='filters'>
+  <tr>
+    <th><label for="common_filters">Common Filters:</label></td>
+    <td>
+      <select id="common_filters" onchange="changeFilter();">
+        <option value="">Choose One</option>
+        <optgroup label="Type">
+          <option value="Shuttle">Shuttle (2)</option>
+          <option value="Fighter">Fighter (4)</option>
+          <option value="Frigate">Frigate (7)</option>
+          <option value="Light Cruiser">Light Cruiser (5)</option>
+          <option value="Heavy Cruiser class">Heavy Cruiser (6)</option>
+          <option value="Dreadnaught">Dreadnaught (5)</option>
+          <option value="Capitol">Capitol (3)</option>
+        </optgroup>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <th><label for="filter">Custom Filter:</label></th>
+    <td><input type="text" id="filter" onkeydown="doFilter(event);" size="40" /> <label for="regex">Regex match?</label> <input type="checkbox" id="regex" /></td>
+  </tr>
+  <tr>
+    <th></th>
+    <td>  
+      <input type="button" onclick="filterTable();" value="Apply Custom Filter" />
+      <input type="button" onclick="removeFilter();" value="Remove Filter" />
+    </td>
+  </tr>
+</table>
+
+<h1>Ships</h1>
+<p>
+  <strong>Note:</strong> 'Craft Only' means that you can obtain plans for this ship to create it yourself. 'Not Obtainable' means plans have never been obtained for these
+  ships.
+</p>
+
+<table id="ships" class="sortable">
+  <thead>
+    <tr>
+      <th>Ship Name</th>
+      <th>Item Slots</th>
+      <th>Hull Points</th>
+	<th>Speed</th>
+<!--
+      <th style='background: #B0171F; color: #fff;'>Weapons</th>
+      <th style='background: #FFD700; color: #fff;'>Engines</th>
+      <th style='background: #008B00; color: #fff;'>Computer</th>
+      <th style='background: #4169E1; color: #fff;'>Shields</th>
+-->
+      <th>Weapons</th>
+      <th>Engines</th>
+      <th>Computer</th>
+      <th>Shields</th>
+      <th>Cargo Capacity</th>
+      <th>Cost</th>
+      <th>Purchase Locations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <h2>Acheron Ghostship</h2>
+        <p>Dreadnaught class</p>
+      </td>
+      <td>7</td>
+      <td>100</td>
+      <td>780</td>
+      <td>27 <img src="red2.jpg" /></td>
+      <td>37 <img src="yellow2.jpg" /></td>
+      <td>26 <img src="green2.jpg" /></td>
+      <td>80 <img src="blue2.jpg" /></td>
+      <td>1200</td>
+      <td>650000</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Automated Defense</h2>
+        <p>Frigate class</p>
+      </td>
+      <td>4</td>
+      <td>50</td>
+      <td>0</td>
+      <td>20 <img src="red2.jpg" /></td>
+      <td>15 <img src="yellow2.jpg" /></td>
+      <td>15 <img src="green2.jpg" /></td>
+      <td>15 <img src="blue2.jpg" /></td>
+      <td>15</td>
+      <td>200000</td>
+      <td>Not Obtainable</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Cy-Tek Botship</h2>
+        <p>Fighter class</p>
+      </td>
+      <td>3</td>
+      <td>55</td>
+      <td>180</td>
+      <td>15 <img src="red2.jpg" /></td>
+      <td>19 <img src="yellow2.jpg" /></td>
+      <td>16 <img src="green2.jpg" /></td>
+      <td>20 <img src="blue2.jpg" /></td>
+      <td>75</td>
+      <td>50000</td>
+      <td>Sirus Engines, Keck Emporium, The Scrapyards, Cytech Systems,<br />Perseus Engines, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Cy-Tek Missile Array</h2>
+        <p>Light Cruiser class</p>
+      </td>
+      <td>5</td>
+      <td>100</td>
+      <td>110</td>
+      <td>21 <img src="red2.jpg" /></td>
+      <td>35 <img src="yellow2.jpg" /></td>
+      <td>24 <img src="green2.jpg" /></td>
+      <td>30 <img src="blue2.jpg" /></td>
+      <td>600</td>
+      <td>210000</td>
+      <td>Sirus Engines, Keck Emporium, The Scrapyards, Cytech Systems,<br />Perseus Engines, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Cy-Tek Needle</h2>
+        <p>Frigate class</p>
+      </td>
+      <td>4</td>
+      <td>80</td>
+      <td>200</td>
+      <td>19 <img src="red2.jpg" /></td>
+      <td>24 <img src="yellow2.jpg" /></td>
+      <td>22 <img src="green2.jpg" /></td>
+      <td>20 <img src="blue2.jpg" /></td>
+      <td>150</td>
+      <td>125000</td>
+      <td>Sirus Engines, Keck Emporium, The Scrapyards, Cytech Systems,<br />Perseus Engines, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Degani Marketship</h2>
+        <p>Light Cruiser class</p>
+      </td>
+      <td>5</td>
+      <td>90</td>
+      <td>135</td>
+      <td>35 <img src="red2.jpg" /></td>
+      <td>32 <img src="yellow2.jpg" /></td>
+      <td>25 <img src="green2.jpg" /></td>
+      <td>35 <img src="blue2.jpg" /></td>
+      <td>1500</td>
+      <td>200000</td>
+      <td>Degani Trader, Sirius Engines, Keck Emporium,<br />Perseus Engines, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Elysian Ferry</h2>
+        <p>Frigate class</p>
+      </td>
+      <td>4</td>
+      <td>85</td>
+      <td>110</td>
+      <td>17 <img src="red2.jpg" /></td>
+      <td>26 <img src="yellow2.jpg" /></td>
+      <td>17 <img src="green2.jpg" /></td>
+      <td>20 <img src="blue2.jpg" /></td>
+      <td>1875</td>
+      <td>90000</td>
+      <td>Sirius Engines, Keck Emporium, Perseus Engines,<br />Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Gamma Sphere</h2>
+        <p>Capitol class</p>
+      </td>
+      <td>8</td>
+      <td>250</td>
+      <td>110</td>
+      <td>48 <img src="red2.jpg" /></td>
+      <td>40 <img src="yellow2.jpg" /></td>
+      <td>40 <img src="green2.jpg" /></td>
+      <td>60 <img src="blue2.jpg" /></td>
+      <td>3750</td>
+      <td>2000000</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Gun Turret</h2>
+        <p>Frigate class</p>
+      </td>
+      <td>4</td>
+      <td>100</td>
+      <td>0</td>
+      <td>35 <img src="red2.jpg" /></td>
+      <td>10 <img src="yellow2.jpg" /></td>
+      <td>15 <img src="green2.jpg" /></td>
+      <td>30 <img src="blue2.jpg" /></td>
+      <td>15</td>
+      <td>200000</td>
+      <td>Not Obtainable</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Jahrwoxi Homeship</h2>
+        <p>Heavy Cruiser class</p>
+      </td>
+      <td>6</td>
+      <td>140</td>
+      <td>60</td>
+      <td>26 <img src="red2.jpg" /></td>
+      <td>27 <img src="yellow2.jpg" /></td>
+      <td>27 <img src="green2.jpg" /></td>
+      <td>25 <img src="blue2.jpg" /></td>
+      <td>3000</td>
+      <td>400000</td>
+      <td>The Scrapyards</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Keck Tradeship</h2>
+        <p>Frigate class</p>
+      </td>
+      <td>4</td>
+      <td>80</td>
+      <td>155</td>
+      <td>22 <img src="red2.jpg" /></td>
+      <td>26 <img src="yellow2.jpg" /></td>
+      <td>15 <img src="green2.jpg" /></td>
+      <td>25 <img src="blue2.jpg" /></td>
+      <td>1500</td>
+      <td>95000</td>
+      <td>Sirius Engines, Keck Emporium, <br />Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Lumina Archive Ship</h2>
+        <p>Capitol class</p>
+      </td>
+      <td>8</td>
+      <td>180</td>
+      <td>55</td>
+      <td>21 <img src="red2.jpg" /></td>
+      <td>27 <img src="yellow2.jpg" /></td>
+      <td>52 <img src="green2.jpg" /></td>
+      <td>50 <img src="blue2.jpg" /></td>
+      <td>3750</td>
+      <td>900000</td>
+      <td>Not Obtainable</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Lumina Cruiser</h2>
+        <p>Light Cruiser class</p>
+      </td>
+      <td>5</td>
+      <td>105</td>
+      <td>110</td>
+      <td>21 <img src="red2.jpg" /></td>
+      <td>20 <img src="yellow2.jpg" /></td>
+      <td>29 <img src="green2.jpg" /></td>
+      <td>30 <img src="blue2.jpg" /></td>
+      <td>750</td>
+      <td>225000</td>
+      <td>Centauri Shipyard, Sirius Engines, Keck Emporium, <br />The Scrapyards, Fires of Azha, Rogue Systems </td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Lumina Warship</h2>
+        <p>Fighter class</p>
+      </td>
+      <td>3</td>
+      <td>70</td>
+      <td>135</td>
+      <td>15 <img src="red2.jpg" /></td>
+      <td>15 <img src="yellow2.jpg" /></td>
+      <td>20 <img src="green2.jpg" /></td>
+      <td>25 <img src="blue2.jpg" /></td>
+      <td>375</td>
+      <td>70000</td>
+      <td>Centauri Shipyard, Sirius Engines, Keck Emporium, <br />The Scrapyards, Fires of Azha, Rogue Systems </td>
+    </tr>
+    <tr>
+      <td>
+        <h2>MRI Blade</h2>
+        <p>Fighter class</p>
+      </td>
+      <td>3</td>
+      <td>50</td>
+      <td>160</td>
+      <td>13 <img src="red2.jpg" /></td>
+      <td>18 <img src="yellow2.jpg" /></td>
+      <td>19 <img src="green2.jpg" /></td>
+      <td>20 <img src="blue2.jpg" /></td>
+      <td>150</td>
+      <td>20000</td>
+      <td>Erebus Shipyard, Gemini Engines, Ceti CPUs, Sirius Engines,<br />Keck Emporium, The Scrapyards, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>MRI Psionic Array</h2>
+        <p>Frigate class</p>
+      </td>
+      <td>4</td>
+      <td>75</td>
+      <td>135</td>
+      <td>17 <img src="red2.jpg" /></td>
+      <td>21 <img src="yellow2.jpg" /></td>
+      <td>23 <img src="green2.jpg" /></td>
+      <td>25 <img src="blue2.jpg" /></td>
+      <td>300</td>
+      <td>100000</td>
+      <td>Erebus Shipyard, Gemini Engines, Ceti CPUs, Sirius Engines,<br />Keck Emporium, The Scrapyards, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>MRI Mindship</h2>
+        <p>Dreadnaught class</p>
+      </td>
+      <td>7</td>
+      <td>150</td>
+      <td>70</td>
+      <td>26 <img src="red2.jpg" /></td>
+      <td>31 <img src="yellow2.jpg" /></td>
+      <td>33 <img src="green2.jpg" /></td>
+      <td>40 <img src="blue2.jpg" /></td>
+      <td>2625</td>
+      <td>600000</td>
+      <td>Erebus Shipyard, Gemini Engines, Ceti CPUs, Sirius Engines,<br />Keck Emporium, The Scrapyards, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>MRI Science Station</h2>
+        <p>Heavy Cruiser class</p>
+      </td>
+      <td>6</td>
+      <td>135</td>
+      <td>90</td>
+      <td>16 <img src="red2.jpg" /></td>
+      <td>17 <img src="yellow2.jpg" /></td>
+      <td>47 <img src="green2.jpg" /></td>
+      <td>30 <img src="blue2.jpg" /></td>
+      <td>2625</td>
+      <td>375000</td>
+      <td>Not Obtainable</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Pirate Heavy Cruiser</h2>
+        <p>Dreadnaught class</p>
+      </td>
+      <td>7</td>
+      <td>150</td>
+      <td>110</td>
+      <td>40 <img src="red2.jpg" /></td>
+      <td>35 <img src="yellow2.jpg" /></td>
+      <td>35 <img src="green2.jpg" /></td>
+      <td>30 <img src="blue2.jpg" /></td>
+      <td>3750</td>
+      <td>550000</td>
+      <td>Not Obtainable</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Pirate Battlecruiser</h2>
+        <p>Heavy Cruiser class</p>
+      </td>
+      <td>6</td>
+      <td>140</td>
+      <td>90</td>
+      <td>32 <img src="red2.jpg" /></td>
+      <td>27 <img src="yellow2.jpg" /></td>
+      <td>27 <img src="green2.jpg" /></td>
+      <td>25 <img src="blue2.jpg" /></td>
+      <td>3000</td>
+      <td>450000</td>
+      <td>Sirius Engines, Keck Emporium,<br />The Scrapyards, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Pirate Warship</h2>
+        <p>Fighter class</p>
+      </td>
+      <td>3</td>
+      <td>50</td>
+      <td>155</td>
+      <td>20 <img src="red2.jpg" /></td>
+      <td>17 <img src="yellow2.jpg" /></td>
+      <td>13 <img src="green2.jpg" /></td>
+      <td>15 <img src="blue2.jpg" /></td>
+      <td>300</td>
+      <td>60000</td>
+      <td>Sirius Engines, Keck Emporium,<br />The Scrapyards, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Quesadan Lightship</h2>
+        <p>Heavy Cruiser class</p>
+      </td>
+      <td>6</td>
+      <td>125</td>
+      <td>135</td>
+      <td>16 <img src="red2.jpg" /></td>
+      <td>32 <img src="yellow2.jpg" /></td>
+      <td>32 <img src="green2.jpg" /></td>
+      <td>50 <img src="blue2.jpg" /></td>
+      <td>2250</td>
+      <td>475000</td>
+      <td>Sirius Engines, Keck Emporium, Fruits of Cephus<br />The Scrapyards, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Soulless Heavy Cruiser</h2>
+        <p>Dreadnaught class</p>
+      </td>
+      <td>7</td>
+      <td>170</td>
+      <td>90</td>
+      <td>30 <img src="red2.jpg" /></td>
+      <td>29 <img src="yellow2.jpg" /></td>
+      <td>31 <img src="green2.jpg" /></td>
+      <td>45 <img src="blue2.jpg" /></td>
+      <td>3000</td>
+      <td>750000</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Soulless Warship</h2>
+        <p>Light Cruiser class</p>
+      </td>
+      <td>5</td>
+      <td>115</td>
+      <td>135</td>
+      <td>23 <img src="red2.jpg" /></td>
+      <td>22 <img src="yellow2.jpg" /></td>
+      <td>15 <img src="green2.jpg" /></td>
+      <td>35 <img src="blue2.jpg" /></td>
+      <td>2250</td>
+      <td>300000</td>
+      <td>Craft Only</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Standard Hauler</h2>
+        <p>Heavy Cruiser class</p>
+      </td>
+      <td>6</td>
+      <td>170</td>
+      <td>70</td>
+      <td>16 <img src="red2.jpg" /></td>
+      <td>47 <img src="yellow2.jpg" /></td>
+      <td>17 <img src="green2.jpg" /></td>
+      <td>20 <img src="blue2.jpg" /></td>
+      <td>6000</td>
+      <td>350000</td>
+      <td>Degani Trader, Sirius Engines, Keck Emporium,<br />The Scrapyards, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Standard Shuttle</h2>
+        <p>Shuttle class</p>
+      </td>
+      <td>3</td>
+      <td>45</td>
+      <td>135</td>
+      <td>9 <img src="red2.jpg" /></td>
+      <td>20 <img src="yellow2.jpg" /></td>
+      <td>16 <img src="green2.jpg" /></td>
+      <td>15 <img src="blue2.jpg" /></td>
+      <td>750</td>
+      <td>25000</td>
+      <td>All Shops</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Standard Transport</h2>
+        <p>Shuttle class</p>
+      </td>
+      <td>3</td>
+      <td>20</td>
+      <td>110</td>
+      <td>9 <img src="red2.jpg" /></td>
+      <td>22 <img src="yellow2.jpg" /></td>
+      <td>17 <img src="green2.jpg" /></td>
+      <td>10 <img src="blue2.jpg" /></td>
+      <td>1350</td>
+      <td>30000</td>
+      <td>All Shops</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Trident Battleship</h2>
+        <p>Capitol class</p>
+      </td>
+      <td>8</td>
+      <td>200</td>
+      <td>45</td>
+      <td>43 <img src="red2.jpg" /></td>
+      <td>31 <img src="yellow2.jpg" /></td>
+      <td>26 <img src="green2.jpg" /></td>
+      <td>50 <img src="blue2.jpg" /></td>
+      <td>3000</td>
+      <td>1000000</td>
+      <td>Aries Shipyard, Sirius Engines, Keck Emporium,<br />The Scrapyards, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Trident Gunship</h2>
+        <p>Heavy Cruiser class</p>
+      </td>
+      <td>6</td>
+      <td>140</td>
+      <td>90</td>
+      <td>35 <img src="red2.jpg" /></td>
+      <td>27 <img src="yellow2.jpg" /></td>
+      <td>17 <img src="green2.jpg" /></td>
+      <td>35 <img src="blue2.jpg" /></td>
+      <td>1500</td>
+      <td>500000</td>
+      <td>Sirius Engines, Keck Emporium,<br />The Scrapyards, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Trident Warship</h2>
+        <p>Frigate class</p>
+      </td>
+      <td>4</td>
+      <td>90</td>
+      <td>110</td>
+      <td>25 <img src="red2.jpg" /></td>
+      <td>23 <img src="yellow2.jpg" /></td>
+      <td>17 <img src="green2.jpg" /></td>
+      <td>30 <img src="blue2.jpg" /></td>
+      <td>450</td>
+      <td>150000</td>
+      <td>Aries Shipyard, Sirius Engines, Keck Emporium,<br />The Scrapyards, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Vortraag Destroyer</h2>
+        <p>Dreadnaught class</p>
+      </td>
+      <td>7</td>
+      <td>160</td>
+      <td>70</td>
+      <td>42 <img src="red2.jpg" /></td>
+      <td>27 <img src="yellow2.jpg" /></td>
+      <td>21 <img src="green2.jpg" /></td>
+      <td>40 <img src="blue2.jpg" /></td>
+      <td>2250</td>
+      <td>700000</td>
+      <td>Sirius Engines, Keck Emporium, The Scrapyards,<br />Fist of Vortraag, Fires of Azha, Rogue Systems</td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Vortraag Heavy Cruiser</h2>
+        <p>Light Cruiser class</p>
+      </td>
+      <td>5</td>
+      <td>110</td>
+      <td>90</td>
+      <td>31 <img src="red2.jpg" /></td>
+      <td>21 <img src="yellow2.jpg" /></td>
+      <td>18 <img src="green2.jpg" /></td>
+      <td>35 <img src="blue2.jpg" /></td>
+      <td>1200</td>
+      <td>250000</td>
+      <td>Sirius Engines, Keck Emporium, The Scrapyards,<br />Fist of Vortraag, Fires of Azha, Rogue Systems</td>
+    </tr>
+  </tbody>
+
+  <tfoot><tr><td colspan='10' id='row_count'></td></tr></tfoot>
+</table>
+
+</body>
+</html>    
